@@ -37,7 +37,7 @@ public:
     clang::CompilerInstance &CI,
     llvm::StringRef InFile) override
   {
-    return llvm::make_unique<clang::ASTConsumer>();
+    return std::make_unique<clang::ASTConsumer>();
   }
 
   std::string intrinsics;

@@ -1,5 +1,6 @@
 #include <clang/AST/Attr.h>
 #include <clang/AST/QualTypeNames.h>
+#include <clang/AST/ParentMapContext.h>
 #include <clang/Index/USRGeneration.h>
 #include <clang-c-frontend/clang_c_convert.h>
 #include <clang-c-frontend/typecast.h>
@@ -918,6 +919,23 @@ bool clang_c_convertert::get_type(const clang::Type &the_type, typet &new_type)
 
     if(get_type(at.desugar(), new_type))
       return true;
+
+    break;
+  }
+
+  case clang::Type::ExtInt:
+  {
+    const clang::ExtIntType &eit =
+      static_cast<const clang::ExtIntType &>(the_type);
+
+    const unsigned n = eit.getNumBits();
+    if(eit.isSigned())
+      new_type = signedbv_typet(n);
+    else
+    {
+      assert(eit.isUnsigned());
+      new_type = unsignedbv_typet(n);
+    }
 
     break;
   }

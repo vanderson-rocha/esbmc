@@ -16,7 +16,7 @@ else()
   find_package(Clang REQUIRED CONFIG)
 endif()
 
-if (${LLVM_VERSION_MAJOR} EQUAL 9)
+if (${LLVM_VERSION_MAJOR} EQUAL 11)
   message(STATUS "LLVM version: ${LLVM_VERSION}")
 else()
   message(FATAL_ERROR "Could not find LLVM/Clang 9.0 at all: please specify with -DLLVM_DIR")
