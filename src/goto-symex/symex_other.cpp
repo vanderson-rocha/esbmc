@@ -10,6 +10,7 @@ Author: Daniel Kroening, kroening@kroening.com
 #include <goto-symex/goto_symex.h>
 #include <util/expr_util.h>
 #include <util/irep2.h>
+#include <util/pretty.h>
 
 void goto_symext::symex_other(const expr2tc code)
 {
@@ -63,6 +64,18 @@ void goto_symext::symex_decl(const expr2tc code)
   replace_nondet(code2);
   dereference(code2, dereferencet::READ);
 
+  // check whether the stack limit check has been activated.
+  if(stack_limit > 0)
+  {
+    // extract the actual variable name.
+    const std::string pretty_name = get_pretty_name(code);
+
+    // check whether the stack size has been reached.
+    claim(
+      (cur_state->top().process_stack_size(code2, stack_limit)),
+      "Stack limit property was violated when declaring " + pretty_name);
+  }
+
   const code_decl2t &decl_code = to_code_decl2t(code2);
 
   // just do the L2 renaming to preseve locality
@@ -108,6 +121,10 @@ void goto_symext::symex_dead(const expr2tc code)
   replace_dynamic_allocation(code2);
   replace_nondet(code2);
   dereference(code2, dereferencet::INTERNAL);
+
+  // check whether the stack limit check has been activated.
+  if(stack_limit > 0)
+    cur_state->top().decrease_stack_frame_size(code2);
 
   const code_dead2t &dead_code = to_code_dead2t(code2);
 

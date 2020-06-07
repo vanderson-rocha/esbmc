@@ -1707,7 +1707,6 @@ void esbmc_parseoptionst::help()
        " --big-endian                 allow big-endian word-byte conversions\n"
        " --16, --32, --64             set width of machine word (default is "
        "64)\n"
-       " --unsigned-char              make \"char\" unsigned by default\n"
        " --version                    show current ESBMC version and exit\n"
        " --witness-output filename    generate the verification result witness "
        "in GraphML format\n"
@@ -1730,6 +1729,8 @@ void esbmc_parseoptionst::help()
        " --i386-linux                 set Linux/I386 architecture (default)\n"
        " --i386-win32                 set Windows/I386 architecture\n"
 #endif
+       " --funsigned-char              make \"char\" unsigned by default\n"
+       " --fms-extensions              enable microsoft C extensions\n"
 
        "\nBMC options\n"
        " --function name              set main function name\n"
@@ -1781,6 +1782,8 @@ void esbmc_parseoptionst::help()
        "--tuple-sym-flattener         encode tuples using our tuple to symbol "
        "API\n"
        "--array-flattener             encode arrays using our array API\n"
+       "--no-return-value-opt         disable return value optimization to "
+       "compute the stack size\n"
 
        "\nIncremental SMT solving\n"
        " --smt-during-symex           enable incremental SMT solving "
@@ -1807,6 +1810,7 @@ void esbmc_parseoptionst::help()
        "check\n"
        " --atomicity-check            enable atomicity check at visible "
        "assignments\n"
+       " --stack-limit bytes          check if stack limit is respected\n"
        " --error-label label          check if label is unreachable\n"
        " --force-malloc-success       do not check for malloc/new failure\n"
 

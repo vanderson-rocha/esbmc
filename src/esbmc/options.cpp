@@ -40,6 +40,8 @@ const struct opt_templ esbmc_options[] = {
   // Frontend
   {'I', "", string, ""},
   {'D', "", string, ""},
+  {'W', "", string, ""},
+  {'f', "", string, ""},
   {0, "preprocess", switc, ""},
   {0, "no-inlining", switc, ""},
   {0, "full-inlining", switc, ""},
@@ -56,7 +58,6 @@ const struct opt_templ esbmc_options[] = {
   {0, "16", switc, ""},
   {0, "32", switc, ""},
   {0, "64", switc, ""},
-  {0, "unsigned-char", switc, ""},
   {0, "version", switc, ""},
   {0, "witness-output", string, ""},
   {0, "witness-producer", string, ""},
@@ -81,6 +82,7 @@ const struct opt_templ esbmc_options[] = {
   {0, "slice-assumes", switc, ""},
   {0, "extended-try-analysis", switc, ""},
   {0, "skip-bmc", switc, ""},
+  {0, "no-return-value-opt", switc, ""},
 
   // IBMC
   {0, "incremental-bmc", switc, ""},
@@ -127,6 +129,7 @@ const struct opt_templ esbmc_options[] = {
   {0, "data-races-check", switc, ""},
   {0, "lock-order-check", switc, ""},
   {0, "atomicity-check", switc, ""},
+  {0, "stack-limit", number, "-1"},
   {0, "error-label", string, ""},
   {0, "force-malloc-success", switc, ""},
 
