@@ -368,7 +368,7 @@ smt_astt smt_convt::convert_str_ast(const expr2tc &expr)
     if(!is_constant_int2t(sub.side_2))
     {
       y = mk_smt_symbol(
-      mk_fresh_name("str_solver::tmp#"), mk_bv_sort(char_width));
+        mk_fresh_name("str_solver::tmp#"), mk_bv_sort(char_width));
       smt_astt uy = mk_seq_unit(y);
       uy->assign(this, args[1]);
       y = mk_sign_ext(y, additional_bits);
